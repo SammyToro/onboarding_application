@@ -8,9 +8,10 @@ import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.security.authentication.JmixUserDetails;
-import org.springframework.security.core.GrantedAuthority;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import org.springframework.security.core.GrantedAuthority;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.UUID;
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class User implements JmixUserDetails, HasTimeZone {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     @JmixGeneratedValue
     private UUID id;
 
@@ -55,8 +56,23 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Column(name = "TIME_ZONE_ID")
     protected String timeZoneId;
 
+    @Column(name = "ONBOARDING_STATUS")
+    private Integer onboardingStatus;
+
+    @JoinColumn(name = "DEPARTMENT_ID")
+    @ManyToOne
+    private Department department;
+
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
+
+    public void setOnboardingStatus(OnboardingStatus onboardingStatus) {
+        this.onboardingStatus = onboardingStatus == null ? null : onboardingStatus.getId();
+    }
+
+    public OnboardingStatus getOnboardingStatus() {
+        return onboardingStatus == null ? null : OnboardingStatus.fromId(onboardingStatus);
+    }
 
     public UUID getId() {
         return id;
@@ -167,5 +183,13 @@ public class User implements JmixUserDetails, HasTimeZone {
 
     public void setTimeZoneId(final String timeZoneId) {
         this.timeZoneId = timeZoneId;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

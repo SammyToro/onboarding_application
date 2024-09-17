@@ -3,9 +3,19 @@
       title="msg://UserDetailView.title"
       focusComponent="form">
     <data>
+        <collection id="departmentsDc" class="com.pactfultech.onboarding.entity.Department">
+            <fetchPlan extends="_base"/>
+            <loader id="departmentsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Department e]]>
+                </query>
+            </loader>
+        </collection>
         <instance id="userDc"
                   class="com.pactfultech.onboarding.entity.User">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="department" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -32,6 +42,8 @@
             <textField id="emailField" property="email"/>
             <comboBox id="timeZoneField" property="timeZoneId"/>
             <checkbox id="activeField" property="active"/>
+            <select id="onboardingStatusField" property="onboardingStatus"/>
+            <entityComboBox id="departmentField" property="department"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>

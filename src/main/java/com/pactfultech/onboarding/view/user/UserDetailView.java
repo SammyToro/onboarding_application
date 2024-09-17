@@ -1,8 +1,10 @@
 package com.pactfultech.onboarding.view.user;
 
+import com.pactfultech.onboarding.entity.OnboardingStatus;
 import com.pactfultech.onboarding.entity.User;
 import com.pactfultech.onboarding.view.main.MainView;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.EntityStates;
@@ -47,6 +49,8 @@ public class UserDetailView extends StandardDetailView<User> {
         usernameField.setReadOnly(false);
         passwordField.setVisible(true);
         confirmPasswordField.setVisible(true);
+        event.getEntity().setOnboardingStatus(OnboardingStatus.NOT_STARTED);
+
     }
 
     @Subscribe
