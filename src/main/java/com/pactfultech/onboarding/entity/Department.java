@@ -1,6 +1,7 @@
 package com.pactfultech.onboarding.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 
@@ -19,6 +20,7 @@ public class Department {
     @Id
     private UUID id;
 
+    @InstanceName
     @Column(name = "NAME", nullable = false)
     private String name;
 
