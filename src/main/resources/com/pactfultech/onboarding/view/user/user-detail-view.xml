@@ -43,7 +43,7 @@
             <comboBox id="timeZoneField" property="timeZoneId"/>
             <checkbox id="activeField" property="active"/>
             <select id="onboardingStatusField" property="onboardingStatus"/>
-            <entityComboBox id="departmentField" property="department"/>
+            <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
