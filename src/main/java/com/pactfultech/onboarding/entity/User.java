@@ -13,6 +13,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -67,8 +68,12 @@ public class User implements JmixUserDetails, HasTimeZone {
     private Department department;
 
     @Composition
+    @OrderBy("sortValue")
     @OneToMany(mappedBy = "user")
     private List<UserStep> steps;
+
+    @Column(name = "JOINING_DATE")
+    private LocalDate joiningDate;
 
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
@@ -206,5 +211,13 @@ public class User implements JmixUserDetails, HasTimeZone {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public LocalDate getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(LocalDate joiningDate) {
+        this.joiningDate = joiningDate;
     }
 }
