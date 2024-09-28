@@ -15,8 +15,10 @@
                   class="com.pactfultech.onboarding.entity.User">
             <fetchPlan extends="_base">
                 <property name="department" fetchPlan="_base"/>
+                <property name="steps" fetchPlan="_base" />
             </fetchPlan>
             <loader/>
+            <collection id="stepsDc" property="steps" />
         </instance>
     </data>
     <actions>
@@ -49,5 +51,18 @@
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
         </hbox>
+        <dataGrid id="stepsDataGrid" dataContainer="stepsDc" width="100%" height="100%">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit" />
+                <action id="remove" type="list_remove" />
+            </actions>
+            <columns>
+                <column property="version" />
+                <column property="dueDate" />
+                <column property="completedDate" />
+                <column property="sortValue" />
+            </columns>
+        </dataGrid>
     </layout>
 </view>
