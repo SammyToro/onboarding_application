@@ -15,8 +15,10 @@ import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
 import io.jmix.core.EntityStates;
+import io.jmix.core.FileStorage;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.UiComponents;
+import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.CollectionContainer;
@@ -37,7 +39,6 @@ import java.util.TimeZone;
 @ViewDescriptor("user-detail-view.xml")
 @EditedEntityContainer("userDc")
 public class UserDetailView extends StandardDetailView<User> {
-
     @ViewComponent
     private TypedTextField<String> usernameField;
     @ViewComponent
@@ -68,6 +69,12 @@ public class UserDetailView extends StandardDetailView<User> {
 
     @Autowired
     private UiComponents uiComponents;
+
+    @Autowired
+    private FileStorage fileStorage;
+
+    @ViewComponent
+    private DataGrid<User> userDataGrid;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -173,4 +180,5 @@ public class UserDetailView extends StandardDetailView<User> {
             user.setOnboardingStatus(OnboardingStatus.IN_PROGRESS);
         }
     }
+
 }
